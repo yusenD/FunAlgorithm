@@ -4,6 +4,7 @@ class Solution {
         return buildTree1(inorder, 0, inorder.length, postorder, 0, postorder.length);
     }
 
+    // in && post
     public TreeNode buildTree1(int[] inorder, int inLeft, int inRight,
                                int[] postorder, int postLeft, int postRight) {
         // 没有元素了
@@ -30,6 +31,28 @@ class Solution {
         root.right = buildTree1(inorder, rootIndex + 1, inRight,
                 postorder, postLeft + (rootIndex - inLeft), postRight - 1);
         return root;
+    }
+    
+    // pre && in
+    public TreeNode buildTree2(int[] preorder, int prebegin, int preend, 
+                                int[] inorder, int inbegin, int inend){
+        
+        if (prebegin >= preend) return null;
+
+        int rootValue = preorder[prebegin];
+        TreeNode root = new TreeNode(rootValue);
+        if(preend - prebegin == 1) return root;
+
+        int rootIndex = 0;
+        for(int i = inbegin; i < inend; i++){
+            if(inorder[i] == rootValue) rootIndex = i;
+        }
+
+        root.left = buildTree1(preorder, prebegin + 1, prebegin + rootIndex - inbegin +1, inorder, inbegin, rootIndex);
+        root.right = buildTree1(preorder, prebegin + rootIndex - inbegin + 1, preend, inorder, rootIndex + 1, inend);
+
+        return root;
+
     }
 
     public class TreeNode {
