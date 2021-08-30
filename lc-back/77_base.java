@@ -17,7 +17,7 @@ class Solution {
             result.add(new ArrayList<>(path));
             return;
         }
-        for (int i = startIndex; i <= n - (k - path.size()) + 1; i++){
+        for (int i = startIndex; i <= n; i++){
             path.add(i);
             combineHelper(n, k, i + 1);
             path.removeLast();
