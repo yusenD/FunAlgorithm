@@ -1,6 +1,8 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -10,6 +12,17 @@ class Solution {
         List<List<Integer>> res = new ArrayList<>();
         if(root == null) return res;
         Queue<TreeNode> que = new LinkedList<>();
+        StringBuilder builder = new StringBuilder();
+        builder.deleteCharAt(0);
+        builder.reverse().toString();
+        
+        Comparator<TreeNode> comparator = new Comparator<TreeNode>() {
+
+            @Override
+            public int compare(TreeNode o1, TreeNode o2) {
+                return o1.val - o2.val;
+            }
+        };
         que.offer(root);
         while(!que.isEmpty()){
             int size = que.size();
