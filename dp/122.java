@@ -11,6 +11,7 @@ class Solution {
                 res+=bouns[i-1];
             }
         }
+        
         return res;
     }
 }
